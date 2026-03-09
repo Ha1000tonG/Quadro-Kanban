@@ -21,7 +21,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 const ADMIN_USERNAME = "Admin";
 const ADMIN_PASSWORD = "123";
 
-// Lógica da página de login do administrador 
+// Lógica da página de login do administrador
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -62,7 +62,7 @@ function LoginPage() {
                 duration: 3000,
                 isClosable: true,
             });
-            navigate("/admin");
+            window.location.href = "/admin"; // Redireciona para a página de administração após o login
         } catch (error) {
             console.error("Falha na autenticação:", error);
             toast({
@@ -92,6 +92,13 @@ function LoginPage() {
             localStorage.removeItem("access_token");
             setUsername("");
             setPassword("");
+
+            // >>> ADICIONE ESTAS TRÊS LINHAS AQUI <<<
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000); // Aguarda 3 segundos (para o usuário ler a mensagem) e limpa a tela
+            // >>> FIM DAS LINHAS ADICIONADAS <<<
+
         } catch (error) {
             console.error("Erro ao resetar DB:", error);
             toast({
