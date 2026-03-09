@@ -20,7 +20,7 @@ class ContentItem(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
-    owner = relationship("User", backref="items", cascade="all, delete")
+    owner = relationship("User", backref="items")  # <-- APAGUE O CASCADE DAQUI
 
 # Modelo de Usuário para autenticação e autorização simples (para fins de demonstração)
 class User(Base):
